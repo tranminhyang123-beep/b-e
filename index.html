@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💖 Love Memory</title>
+<title>💍 Love Game Cinematic</title>
 
 <style>
 *{
@@ -15,150 +15,166 @@
 body{
     height:100vh;
     overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
     font-family:"Segoe UI", sans-serif;
     background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
     background-size:400% 400%;
     animation: bg 10s ease infinite;
 }
 
+/* BACKGROUND ANIMATION */
 @keyframes bg{
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
 
-/* 🎬 INTRO */
+/* ===== INTRO ===== */
 #intro{
     position:absolute;
     width:100%;
     height:100%;
-    background:black;
-    color:white;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
-    z-index:999;
-    transition:1s;
+    flex-direction:column;
+    background:rgba(0,0,0,0.6);
+    color:white;
+    z-index:10;
 }
 
 #intro h1{
-    font-size:40px;
-    animation: glow 2s infinite;
+    font-size:32px;
+    margin-bottom:20px;
 }
 
-@keyframes glow{
-    0%,100%{text-shadow:0 0 10px #ff4d6d;}
-    50%{text-shadow:0 0 30px #ff4d6d;}
+#intro button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    background:#ff4d6d;
+    color:white;
 }
 
-/* 💌 CARD */
+/* ===== CARD ===== */
 .card{
     width:90%;
-    max-width:650px;
+    max-width:600px;
     background:rgba(255,255,255,0.92);
     padding:30px;
     border-radius:25px;
     text-align:center;
     box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
     display:none;
 }
 
-.heart{
-    font-size:60px;
-    animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-}
-
+/* TITLE */
 .title{
-    font-size:28px;
-    color:#ff4d6d;
+    font-size:26px;
     font-weight:bold;
-    margin-top:10px;
-}
-
-.days{
-    margin-top:15px;
-    font-size:18px;
     color:#ff4d6d;
-    font-weight:bold;
+    margin-bottom:20px;
 }
 
-/* 💬 STORY TEXT */
-.line{
-    margin-top:20px;
-    font-size:20px;
-    color:#444;
-    min-height:60px;
-    border-right:2px solid #ff4d6d;
-    white-space:pre-line;
-}
-
-/* 💌 BUTTON */
+/* BUTTONS */
 .btn{
-    margin-top:20px;
     padding:12px 25px;
     border:none;
     border-radius:30px;
+    font-size:18px;
+    cursor:pointer;
+    margin:10px;
+}
+
+.yes{
     background:#ff4d6d;
     color:white;
-    cursor:pointer;
-    display:none;
 }
 
-/* 💖 HEART */
-.heart-float{
+.no{
+    background:#444;
+    color:white;
+    position:absolute;
+    top:60%;
+    left:55%;
+    transition:0.2s;
+}
+
+/* RESULT */
+.result{
+    display:none;
+    margin-top:20px;
+    font-size:18px;
+    color:#333;
+    line-height:1.8;
+    animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* RING */
+.ring{
+    font-size:60px;
+    margin:20px 0;
+    animation: ring 1.5s infinite;
+}
+
+@keyframes ring{
+    0%,100%{transform:scale(1) rotate(0deg);}
+    50%{transform:scale(1.2) rotate(10deg);}
+}
+
+/* HEART */
+.heart{
     position:absolute;
     bottom:-50px;
-    font-size:18px;
-    animation: rise linear forwards;
+    font-size:20px;
+    animation: floatUp linear forwards;
 }
 
-@keyframes rise{
+@keyframes floatUp{
     from{transform:translateY(0);opacity:1;}
     to{transform:translateY(-120vh);opacity:0;}
 }
 
-/* 📖 POPUP */
-.popup{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.7);
+/* CONFETTI */
+.confetti{
+    position:absolute;
+    width:8px;
+    height:8px;
+    top:-10px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(120vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+/* ENVELOPE */
+#letter{
     display:none;
-    justify-content:center;
-    align-items:center;
+    margin-top:20px;
+    padding:20px;
+    border:2px dashed #ff4d6d;
+    border-radius:15px;
+    background:#fff;
+    animation: openLetter 1s ease;
 }
 
-.popup-card{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    max-width:420px;
-    animation: pop 0.4s ease;
-}
-
-@keyframes pop{
-    from{transform:scale(0);}
-    to{transform:scale(1);}
-}
-
-/* 🎵 */
-.musicBtn{
-    margin-top:10px;
-    padding:10px 15px;
-    border:none;
-    border-radius:20px;
-    background:#333;
-    color:white;
-    cursor:pointer;
+@keyframes openLetter{
+    from{transform:scale(0); opacity:0;}
+    to{transform:scale(1); opacity:1;}
 }
 </style>
 </head>
@@ -167,121 +183,113 @@ body{
 
 <!-- 🎬 INTRO -->
 <div id="intro">
-    <h1>💖 Loading Love Memory</h1>
-    <p>23/02/2024 ❤️ Forever</p>
+    <h1>💍 Một câu hỏi rất quan trọng...</h1>
+    <button onclick="startGame()">Bắt đầu 💖</button>
 </div>
 
-<!-- 🎵 MUSIC -->
-<audio id="bgMusic" loop>
+<audio id="music" loop>
     <source src="'một đời' - 14 Casper & Bon Nghiêm (feat (mp3cut.net).mp3" type="audio/mpeg">
 </audio>
 
-<!-- 💌 MAIN -->
-<div class="card">
+<!-- 💌 GAME -->
+<div class="card" id="game">
 
-    <div class="heart">💖</div>
+    <div class="title">💖 Bé có đồng ý làm vợ anh không?</div>
 
-    <div class="title">Yang ❤️ Ly</div>
+    <button class="btn yes" onclick="yes()">💍 Có</button>
+    <button class="btn no" id="noBtn">❌ Không</button>
 
-    <div class="days" id="days"></div>
-
-    <div class="line" id="line"></div>
-
-    <button class="musicBtn" onclick="playMusic()">🎵 Bật nhạc</button>
-
-    <button class="btn" id="btn" onclick="openPopup()">💌 Mở thư</button>
-
-</div>
-
-<!-- 📖 POPUP -->
-<div class="popup" id="popup">
-    <div class="popup-card">
-        <h2>💖 Thư gửi em</h2>
-        <p>
-            Từ 23/02/2024 đến hôm nay...<br><br>
-            Anh vẫn luôn chọn em ❤️<br><br>
-            Không cần hoàn hảo, chỉ cần là em 🥺
-        </p>
-        <br>
-        <button onclick="closePopup()">Đóng</button>
+    <div id="letter">
+        💌 Anh không biết tương lai ra sao...<br><br>
+        Nhưng anh biết hiện tại anh muốn có em ❤️<br><br>
+        Dù thế giới có thay đổi,<br>
+        anh vẫn sẽ chọn em 💍
     </div>
+
+    <div class="result" id="result">
+        <div class="ring">💍</div>
+        Anh biết mà… em sẽ chọn anh ❤️<br><br>
+        💍 Anh yêu em mãi mãi 💍
+    </div>
+
 </div>
 
 <script>
 
-const music=document.getElementById("bgMusic");
+const intro = document.getElementById("intro");
+const game = document.getElementById("game");
+const noBtn = document.getElementById("noBtn");
+const music = document.getElementById("music");
 
-/* 🎵 music */
-function playMusic(){
-    music.play();
+function startGame(){
+    intro.style.display="none";
+    game.style.display="block";
 }
 
-/* 🎬 intro */
-setTimeout(()=>{
-    document.getElementById("intro").style.opacity="0";
-    setTimeout(()=>{
-        document.getElementById("intro").remove();
-        document.querySelector(".card").style.display="block";
-    },800);
-},2500);
-
-/* 📅 DAYS COUNT */
-const loveDate = new Date("2024-02-23");
-
-function updateDays(){
-    const now = new Date();
-    const diff = now - loveDate;
-    const days = Math.floor(diff/(1000*60*60*24));
-
-    document.getElementById("days").innerHTML =
-    "💞 " + days + " ngày yêu nhau kể từ 23/02/2024";
-}
-updateDays();
-
-/* 💬 STORY */
-const texts = [
-"Anh nhớ em mỗi ngày 🥺",
-"Từ 23/02/2024 đến bây giờ...",
-"Em là điều đẹp nhất ❤️",
-"Anh chỉ cần em thôi..."
-];
-
-let i=0;
-let el=document.getElementById("line");
-
-function story(){
-    if(i < texts.length){
-        el.innerHTML = texts[i];
-        i++;
-        setTimeout(story,2000);
-    }else{
-        document.getElementById("btn").style.display="inline-block";
-    }
+/* ❌ nút chạy trốn */
+function moveBtn(){
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
 }
 
-setTimeout(story,3000);
+noBtn.addEventListener("mouseover", moveBtn);
+noBtn.addEventListener("touchstart", (e)=>{
+    e.preventDefault();
+    moveBtn();
+});
 
-/* 💌 popup */
-function openPopup(){
-    document.getElementById("popup").style.display="flex";
-}
-function closePopup(){
-    document.getElementById("popup").style.display="none";
+/* 💍 YES */
+function yes(){
+
+    // fade in music
+    music.volume = 0;
+    music.play().catch(()=>{});
+
+    let vol = 0;
+    let fade = setInterval(()=>{
+        if(vol < 0.8){
+            vol += 0.05;
+            music.volume = vol;
+        } else {
+            clearInterval(fade);
+        }
+    },200);
+
+    document.getElementById("letter").style.display="block";
+    document.getElementById("result").style.display="block";
+
+    startHearts();
+    startConfetti();
 }
 
 /* 💖 hearts */
-function heart(){
-    const h=document.createElement("div");
-    h.className="heart-float";
-    h.innerHTML="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(12+Math.random()*20)+"px";
-    h.style.animationDuration=(4+Math.random()*4)+"s";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),8000);
+function startHearts(){
+    setInterval(()=>{
+        const h = document.createElement("div");
+        h.className="heart";
+        h.innerHTML="💖";
+        h.style.left=Math.random()*100+"vw";
+        h.style.fontSize=(15+Math.random()*25)+"px";
+        h.style.animationDuration=(3+Math.random()*3)+"s";
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),6000);
+    },200);
 }
 
-setInterval(heart,200);
+/* 🎉 confetti */
+function startConfetti(){
+    setInterval(()=>{
+        const c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*100+"vw";
+        c.style.background=["#ff4d6d","#ffd166","#06d6a0","#4cc9f0"][Math.floor(Math.random()*4)];
+        c.style.animationDuration=(2+Math.random()*3)+"s";
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    },80);
+}
 
 </script>
 
